@@ -69,7 +69,7 @@ const Night = () => {
       <Cloud width={50} color="#000" opacity={0.7} position={[0, 9, -10]} />
       <Cloud color="#000" opacity={0.5} width={50} position={[-10, 9, 0]} />
       <Cloud color="#000" opacity={0.8} width={50} position={[-10, 15, -10]} />
-      <Effects />
+      {/* <Effects /> */}
     </>
   );
 };
