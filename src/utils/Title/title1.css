@@ -1,0 +1,37 @@
+h1 {
+  font-family: sans-serif;
+  text-align: center;
+  font-size: 3em;
+  text-transform: uppercase;
+}
+
+.text-animation {
+  position: relative;
+  width: 10px;
+  height: 20px;
+}
+.text-animation.state-1::before {
+  width: 1px;
+}
+.text-animation::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background: #0e182d;
+  width: 0;
+  height: 1.2em;
+  -ms-transform: translate(-50%, -55%);
+  transform: translate(-50%, -55%);
+}
+
+.text-animation.state-2::before {
+  width: 0.9em;
+}
+
+.text-animation.state-3 {
+  color: inherit;
+}
+.text-animation.state-3::before {
+  display: none;
+}

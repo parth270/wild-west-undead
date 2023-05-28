@@ -1,0 +1,194 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+body {
+  background-color: #17191c;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+@font-face {
+  font-family: "cowboy";
+  src: local("GoldmanBold"), url("../fonts/Cowboy_Movie.ttf") format("truetype");
+  font-weight: bold;
+}
+
+.cowboy {
+  font-family: "cowboy" !important;
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+  margin: 0;
+  padding: 0;
+}
+
+*::-webkit-scrollbar {
+  width: 5px;
+  background-color: #cccccc00;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #000;
+  border-radius: 12px;
+}
+
+/* AniDiv Component Classes */
+
+.rugged-border {
+  clip-path: polygon(
+    0% 0%,
+    25% 1%,
+    42% 0%,
+    75% 1%,
+    90% 0%,
+    99% 1%,
+    100% 16%,
+    99% 65%,
+    100% 99%,
+    91% 100%,
+    32% 100%,
+    19% 98%,
+    1% 100%,
+    2% 74%,
+    0 43%,
+    1% 20%
+  );
+}
+
+/* Animated UI Special Classes */
+
+@keyframes exitAnimation {
+  from {
+    opacity: 1;
+    scale: 1;
+  }
+
+  to {
+    opacity: 0;
+    scale: 0;
+  }
+}
+
+.exitAnimation {
+  animation: exitAnimation 1s ease-out;
+}
+
+/*  */
+
+@keyframes entranceAnimation {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.entranceAnimation {
+  animation: entranceAnimation 0.8s ease forwards;
+}
+
+/*  */
+
+@keyframes entranceButtonAnimation {
+  from {
+    transform: rotate(45deg);
+    opacity: 0;
+    scale: 0;
+  }
+
+  to {
+    transform: rotate(0deg);
+    opacity: 1;
+    scale: 1;
+  }
+}
+
+.entranceButtonAnimation {
+  animation: entranceButtonAnimation 0.8s ease forwards;
+}
+
+/*  */
+
+@keyframes exitButtonAnimation {
+  from {
+    transform: rotate(0deg);
+    opacity: 1;
+    scale: 1;
+  }
+
+  to {
+    transform: rotate(45deg);
+    opacity: 0;
+    scale: 0;
+  }
+}
+
+.exitButtonAnimation {
+  animation: exitButtonAnimation 0.8s ease forwards;
+}
+
+/*  */
+
+@keyframes lineAnimation {
+  0% {
+    transform: scaleX(0);
+  }
+  100% {
+    transform: scaleX(1);
+  }
+}
+
+.line-animation {
+  width: 50%;
+  height: 2px;
+  background-color: white;
+  animation: lineAnimation 1.2s ease-in-out forwards;
+  transform-origin: left;
+}
+
+.logo-width {
+  width: 320px;
+}
+
+@media all and (max-width: 1020px) and (min-width: 300px) {
+  .logo-width {
+    width: 280px;
+  }
+}
+/* 
+.dot-animation {
+  animation: dot-animation 2s ease-in-out infinite;
+}
+
+@keyframes dot-animation {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+} */
