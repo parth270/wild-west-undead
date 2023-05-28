@@ -5,6 +5,7 @@ import React, {
   useRef,
   useMemo,
   useCallback,
+  useTransition,
 } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import {
@@ -16,6 +17,7 @@ import {
   Gltf,
   useGLTF,
   useProgress,
+  Environment,
 } from "@react-three/drei";
 import LoadingScreen from "./Layout/LoadingScreen";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
@@ -41,6 +43,7 @@ import {
 } from "./animations/AnimatedUI/AniDiv";
 import TargetModel from "./animations/AnimatedUI/TargetModel";
 import Night from "./three/night";
+import { useControls } from "leva";
 
 const Loader = () => {
   const { progress } = useProgress();
@@ -244,6 +247,12 @@ function Scene({}) {
 //
 //
 
+function Env() {
+ 
+  return <Environment preset={'night'} blur={0.65} />
+}
+
+
 function SceneContainer({
   isInPosition,
   setIsInPosition,
@@ -366,6 +375,9 @@ function SceneContainer({
           <meshStandardMaterial color={darkMode ? "gray" : "blue"} />
         </mesh>
       </Suspense>
+      {/* <Environment files="/f1.hdr"  /> */}
+      {/* <Environment files="https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/1k/industrial_workshop_foundry_1k.hdr" near={100} /> */}
+      <Env/>
       <PerspectiveCamera
         theatreKey="Camera"
         makeDefault
