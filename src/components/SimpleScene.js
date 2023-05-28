@@ -376,7 +376,7 @@ function SceneContainer({
       </Suspense>
       {/* <Environment files="/f1.hdr"  /> */}
       {/* <Environment files="https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/1k/industrial_workshop_foundry_1k.hdr" near={100} /> */}
-      <Env/>
+      {/* <Env/> */}
       <PerspectiveCamera
         theatreKey="Camera"
         makeDefault
@@ -408,7 +408,7 @@ function SceneContainer({
         position={[2.96, 0.2, 0.81]}
         rotation={[0, 0, 0]}
         onClick={()=>{
-          
+
         }}
       />
       {isInPosition && (
