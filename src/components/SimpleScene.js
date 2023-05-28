@@ -249,7 +249,7 @@ function Scene({}) {
 
 function Env() {
  
-  return <Environment preset={'night'} blur={0.65} />
+  return <Environment preset={'night'} blur={0.65}  />
 }
 
 
@@ -257,7 +257,6 @@ function SceneContainer({
   isInPosition,
   setIsInPosition,
   showAniDiv,
-
   handleAniDivS1,
   handleAniDivS2,
   handleAniDivS3,
@@ -405,11 +404,13 @@ function SceneContainer({
         // onClick={handleAniDivS3}
         onClick={() => {}}
       /> */}
-      {/* <TargetModel
+      <TargetModel
         position={[2.96, 0.2, 0.81]}
         rotation={[0, 0, 0]}
-        onClick={handleTargetClick}
-      /> */}
+        onClick={()=>{
+          
+        }}
+      />
       {isInPosition && (
         <mesh
           // onClick={handleTargetClick}
