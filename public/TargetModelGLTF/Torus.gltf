@@ -1,0 +1,134 @@
+{
+  "asset": { "generator": "glTF-Transform v3.3.6", "version": "2.0" },
+  "accessors": [
+    { "type": "SCALAR", "componentType": 5123, "count": 3486 },
+    {
+      "type": "VEC3",
+      "componentType": 5126,
+      "count": 2324,
+      "max": [1.7608340978622437, 0.25, 1.8630009889602661],
+      "min": [-1.7641003131866455, -0.25, -1.9564321041107178]
+    },
+    { "type": "VEC3", "componentType": 5126, "count": 2324 },
+    { "type": "VEC2", "componentType": 5126, "count": 2324 },
+    {
+      "type": "SCALAR",
+      "componentType": 5126,
+      "count": 2,
+      "max": [0.4166666567325592],
+      "min": [0.0416666679084301],
+      "bufferView": 0,
+      "byteOffset": 0
+    },
+    {
+      "type": "VEC3",
+      "componentType": 5126,
+      "count": 2,
+      "bufferView": 0,
+      "byteOffset": 8
+    },
+    {
+      "type": "VEC4",
+      "componentType": 5126,
+      "count": 2,
+      "bufferView": 0,
+      "byteOffset": 32
+    },
+    {
+      "type": "VEC3",
+      "componentType": 5126,
+      "count": 2,
+      "bufferView": 0,
+      "byteOffset": 64
+    },
+    {
+      "type": "VEC3",
+      "componentType": 5126,
+      "count": 2,
+      "bufferView": 0,
+      "byteOffset": 88
+    }
+  ],
+  "bufferViews": [
+    { "buffer": 0, "byteOffset": 0, "byteLength": 112 },
+    { "buffer": 0, "byteOffset": 112, "byteLength": 5799 }
+  ],
+  "samplers": [
+    { "magFilter": 9729, "minFilter": 9987, "wrapS": 10497, "wrapT": 10497 }
+  ],
+  "textures": [{ "source": 0, "sampler": 0 }],
+  "images": [
+    {
+      "name": "Torus_Bake2_PBR_Diffuse",
+      "mimeType": "image/jpeg",
+      "uri": "baseColor.jpg"
+    }
+  ],
+  "buffers": [{ "uri": "Torus.bin", "byteLength": 5911 }],
+  "materials": [
+    {
+      "name": "Torus_Baked.001",
+      "alphaMode": "BLEND",
+      "doubleSided": true,
+      "pbrMetallicRoughness": {
+        "roughnessFactor": 0.5,
+        "metallicFactor": 0,
+        "baseColorTexture": { "index": 0 }
+      }
+    }
+  ],
+  "meshes": [
+    {
+      "name": "Torus.002",
+      "primitives": [
+        {
+          "attributes": { "POSITION": 1, "NORMAL": 2, "TEXCOORD_0": 3 },
+          "mode": 4,
+          "material": 0,
+          "indices": 0,
+          "extensions": {
+            "KHR_draco_mesh_compression": {
+              "bufferView": 1,
+              "attributes": { "POSITION": 0, "NORMAL": 1, "TEXCOORD_0": 2 }
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "nodes": [
+    { "name": "Torus_Baked", "scale": [1, -0.015664100646972656, 1], "mesh": 0 }
+  ],
+  "animations": [
+    {
+      "name": "Contract",
+      "samplers": [
+        { "input": 4, "output": 5, "interpolation": "LINEAR" },
+        { "input": 4, "output": 6, "interpolation": "LINEAR" },
+        { "input": 4, "output": 7, "interpolation": "LINEAR" }
+      ],
+      "channels": [
+        { "sampler": 0, "target": { "node": 0, "path": "translation" } },
+        { "sampler": 1, "target": { "node": 0, "path": "rotation" } },
+        { "sampler": 2, "target": { "node": 0, "path": "scale" } }
+      ]
+    },
+    {
+      "name": "Expand",
+      "samplers": [
+        { "input": 4, "output": 5, "interpolation": "LINEAR" },
+        { "input": 4, "output": 6, "interpolation": "LINEAR" },
+        { "input": 4, "output": 8, "interpolation": "LINEAR" }
+      ],
+      "channels": [
+        { "sampler": 0, "target": { "node": 0, "path": "translation" } },
+        { "sampler": 1, "target": { "node": 0, "path": "rotation" } },
+        { "sampler": 2, "target": { "node": 0, "path": "scale" } }
+      ]
+    }
+  ],
+  "scenes": [{ "name": "Scene", "nodes": [0] }],
+  "scene": 0,
+  "extensionsUsed": ["KHR_draco_mesh_compression"],
+  "extensionsRequired": ["KHR_draco_mesh_compression"]
+}
