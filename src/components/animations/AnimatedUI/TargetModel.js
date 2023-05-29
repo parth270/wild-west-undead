@@ -1,13 +1,9 @@
-import React, { useMemo, useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useGLTF } from '@react-three/drei'
 import { gsap } from 'gsap'
 
 const TargetModel = ({ position, rotation, onClick }) => {
-  const { scene } = useGLTF('/assets/targetwwu.glb')
-
-  const copiedScene = useMemo(() => scene.clone(true), [scene])
-
-  const spotLightRef = useRef()
+  const torusGLB = useGLTF('/assets/Torus.glb')
   const meshRef = useRef()
   const sphereRef = useRef()
   const [isHovered, setIsHovered] = useState(false)
@@ -44,12 +40,6 @@ const TargetModel = ({ position, rotation, onClick }) => {
   }
 
   useEffect(() => {
-    if (spotLightRef.current && copiedScene) {
-      spotLightRef.current.target = copiedScene
-    }
-  }, [copiedScene])
-
-  useEffect(() => {
     if (isHovered || isPointerDown) {
       gsap.to(meshRef.current.scale, {
         x: isPointerDown ? 0.6 : 0.8,
@@ -69,23 +59,12 @@ const TargetModel = ({ position, rotation, onClick }) => {
 
   return (
     <>
-      <spotLight
-        ref={spotLightRef}
-        position={[5, 0, 0]}
-        distance={3}
-        intensity={5}
-      />
       <group position={position} rotation={rotation}>
-        <mesh ref={meshRef}>
-          <primitive
-            object={copiedScene}
-            rotation={[1.6, 3.1, 1.2]}
-            scale={0.03}
-          />
+        <mesh ref={meshRef} onClick={onClick}>
+          <primitive object={torusGLB.scene} scale={0.03} />
         </mesh>
         <mesh
           ref={sphereRef}
-          onClick={onClick}
           onPointerOver={toggleHover}
           onPointerOut={toggleHover}
           onPointerDown={handlePointerDown}
