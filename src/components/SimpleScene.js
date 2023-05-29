@@ -6,8 +6,8 @@ import React, {
   useMemo,
   useCallback,
   useTransition,
-} from "react";
-import { Canvas, useFrame, useThree } from "@react-three/fiber";
+} from 'react'
+import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import {
   OrbitControls,
   ScrollControls,
@@ -18,51 +18,51 @@ import {
   useGLTF,
   useProgress,
   Environment,
-} from "@react-three/drei";
-import LoadingScreen from "./Layout/LoadingScreen";
-import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
-import WildWestTown from "./animations/Environment/WildWestTown";
-import { useDispatch } from "react-redux";
-import { setLoading, setProgress } from "../services/three";
-import { setAppear } from "../services/modeling";
-import * as THREE from "three";
-import { getProject, val } from "@theatre/core";
-import flyThroughState from "./animations/fly-2.json";
+} from '@react-three/drei'
+import LoadingScreen from './Layout/LoadingScreen'
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
+import WildWestTown from './animations/Environment/WildWestTown'
+import { useDispatch } from 'react-redux'
+import { setLoading, setProgress } from '../services/three'
+import { setAppear } from '../services/modeling'
+import * as THREE from 'three'
+import { getProject, val } from '@theatre/core'
+import flyThroughState from './animations/fly-2.json'
 
 import {
   editable as e,
   SheetProvider,
   PerspectiveCamera,
   useCurrentSheet,
-} from "@theatre/r3f";
+} from '@theatre/r3f'
 
 import {
   AniDivScene1,
   AniDivScene2,
   AniDivScene3,
-} from "./animations/AnimatedUI/AniDiv";
-import TargetModel from "./animations/AnimatedUI/TargetModel";
-import Night from "./three/night";
-import { useControls } from "leva";
+} from './animations/AnimatedUI/AniDiv'
+import TargetModel from './animations/AnimatedUI/TargetModel'
+import Night from './three/night'
+import { useControls } from 'leva'
 
 const Loader = () => {
-  const { progress } = useProgress();
-  const dispatch = useDispatch();
+  const { progress } = useProgress()
+  const dispatch = useDispatch()
   useEffect(() => {
-    console.log(progress, "please checl jere");
+    console.log(progress, 'please checl jere')
     if (Number(progress) === 100) {
-      dispatch(setProgress(progress));
-      dispatch(setLoading(false));
+      dispatch(setProgress(progress))
+      dispatch(setLoading(false))
       setTimeout(() => {
-        dispatch(setAppear(false));
-      }, 2200);
+        dispatch(setAppear(false))
+      }, 2200)
     } else {
-      dispatch(setProgress(progress));
+      dispatch(setProgress(progress))
     }
-  }, [progress]);
+  }, [progress])
 
-  return <></>;
-};
+  return <></>
+}
 
 // function SceneContainer1() {
 //   const [isLoading, setIsLoading] = useState(true)
@@ -139,40 +139,40 @@ const Loader = () => {
 // }
 
 function Scene({}) {
-  const [isInPosition, setIsInPosition] = useState(false);
-  const [showAniDiv, setShowAniDiv] = useState(false);
-  const [showAniDivScene1, setShowAniDivScene1] = useState(false);
-  const [showAniDivScene2, setShowAniDivScene2] = useState(false);
-  const [showAniDivScene3, setShowAniDivScene3] = useState(false);
-  const ref = useRef();
+  const [isInPosition, setIsInPosition] = useState(false)
+  const [showAniDiv, setShowAniDiv] = useState(false)
+  const [showAniDivScene1, setShowAniDivScene1] = useState(false)
+  const [showAniDivScene2, setShowAniDivScene2] = useState(false)
+  const [showAniDivScene3, setShowAniDivScene3] = useState(false)
+  const ref = useRef()
 
   const handleAniDivS1 = () => {
-    setShowAniDiv(true);
-    setShowAniDivScene1(true);
-    setShowAniDivScene2(false);
-    setShowAniDivScene3(false);
-  };
+    setShowAniDiv(true)
+    setShowAniDivScene1(true)
+    setShowAniDivScene2(false)
+    setShowAniDivScene3(false)
+  }
 
   const handleAniDivS2 = () => {
-    setShowAniDiv(true);
-    setShowAniDivScene1(false);
-    setShowAniDivScene2(true);
-    setShowAniDivScene3(false);
-  };
+    setShowAniDiv(true)
+    setShowAniDivScene1(false)
+    setShowAniDivScene2(true)
+    setShowAniDivScene3(false)
+  }
 
   const handleAniDivS3 = () => {
-    setShowAniDiv(true);
-    setShowAniDivScene1(false);
-    setShowAniDivScene2(false);
-    setShowAniDivScene3(true);
-  };
+    setShowAniDiv(true)
+    setShowAniDivScene1(false)
+    setShowAniDivScene2(false)
+    setShowAniDivScene3(true)
+  }
 
   const handleCloseAniDiv = () => {
-    setShowAniDiv(false);
-    setShowAniDivScene1(false);
-    setShowAniDivScene2(false);
-    setShowAniDivScene3(false);
-  };
+    setShowAniDiv(false)
+    setShowAniDivScene1(false)
+    setShowAniDivScene2(false)
+    setShowAniDivScene3(false)
+  }
 
   // useEffect(() => {
   //   const canvas = document.getElementById("canvas-222");
@@ -184,26 +184,25 @@ function Scene({}) {
   //     }
   //   }, 10000);
   // });
-  const sheet = getProject("Fly Through-1", { state: flyThroughState }).sheet(
-    "Scene"
-  );
+  const sheet = getProject('Fly Through-1', { state: flyThroughState }).sheet(
+    'Scene'
+  )
 
   return (
     <>
       <Canvas
         ref={ref}
-        className="canvas-container"
-        id="canvas-222"
+        className='canvas-container'
+        id='canvas-222'
         style={{
-          position: "fixed",
+          position: 'fixed',
           top: 0,
           left: 0,
-          width: "100%",
-          height: "100%",
-          backgroundColor: "#41100e",
+          width: '100%',
+          height: '100%',
+          backgroundColor: '#41100e',
           // visibility: isLoading ? "hidden" : "visible",
-        }}
-      >
+        }}>
         <ScrollControls pages={28}>
           <SheetProvider sheet={sheet}>
             <SceneContainer
@@ -230,11 +229,10 @@ function Scene({}) {
 
       {/* Render AniDiv only when showAniDiv is true */}
     </>
-  );
+  )
 }
 
 // const scroll = useScroll();
-
 
 // function logCurrentPage() {
 //   const currentPage = Math.floor(scroll.offset * scroll.pages) + 1;
@@ -248,10 +246,8 @@ function Scene({}) {
 //
 
 function Env() {
- 
   return <Environment preset={'night'} blur={0.65} />
 }
-
 
 function SceneContainer({
   isInPosition,
@@ -262,8 +258,8 @@ function SceneContainer({
   handleAniDivS2,
   handleAniDivS3,
 }) {
-  const sheet = useCurrentSheet();
-  const scroll = useScroll();
+  const sheet = useCurrentSheet()
+  const scroll = useScroll()
 
   //  State to track whether AniDiv should be shown
 
@@ -271,63 +267,63 @@ function SceneContainer({
   //   setShowAniDiv(true)
   // }
 
-  const [played, setPlayed] = useState(true);
+  const [played, setPlayed] = useState(true)
 
   useEffect(() => {
-    const audio = new Audio("/terror.mp3");
+    const audio = new Audio('/terror.mp3')
 
     const handleScroll = () => {
-      console.log("playing");
-      audio.loop = true; // Enable looping
+      console.log('playing')
+      audio.loop = true // Enable looping
       audio.play().catch((error) => {
         // Handle playback error if necessary
-        console.error("Error playing audio:", error);
-      });
-    };
+        console.error('Error playing audio:', error)
+      })
+    }
 
     const adding = () => {
       if (played) {
-        handleScroll();
-        setPlayed(false);
+        handleScroll()
+        setPlayed(false)
       }
-    };
+    }
 
-    document.addEventListener("wheel", adding, false);
+    document.addEventListener('wheel', adding, false)
 
     return () => {
-      document.removeEventListener("wheel", adding, false);
+      document.removeEventListener('wheel', adding, false)
       if (audio) {
-        audio.pause();
-        audio.currentTime = 0;
+        audio.pause()
+        audio.currentTime = 0
       }
-    };
-  }, []);
+    }
+  }, [])
 
   // our callback will run on every animation frame
   useFrame(() => {
     if (scroll) {
-      logCurrentPage(scroll);
-      const sequenceLength = val(sheet.sequence.pointer.length);
-      sheet.sequence.position = scroll.offset * sequenceLength;
+      logCurrentPage(scroll)
+      const sequenceLength = val(sheet.sequence.pointer.length)
+      sheet.sequence.position = scroll.offset * sequenceLength
     }
-  });
+  })
 
   function logCurrentPage(scroll) {
-    const currentPage = Math.floor(scroll.offset * scroll.pages) + 1;
-    console.log("Current Page:", currentPage);
+    const currentPage = Math.floor(scroll.offset * scroll.pages) + 1
+    console.log('Current Page:', currentPage)
 
     if (currentPage === 5) {
-      setIsInPosition(true);
+      setIsInPosition(true)
     } else {
-      setIsInPosition(false);
+      setIsInPosition(false)
     }
   }
 
-  const bgColor = "#84a4f4";
+  const bgColor = '#84a4f4'
 
-  const [isLoading, setIsLoading] = useState(true);
-  const [darkMode, setDarkMode] = useState(true);
-  const dispatch = useDispatch();
+  const [isLoading, setIsLoading] = useState(true)
+  const [darkMode, setDarkMode] = useState(true)
+  const dispatch = useDispatch()
 
   // useEffect(() => {
   //   dispatch(setLoading(true))
@@ -353,12 +349,12 @@ function SceneContainer({
   // }, [])
 
   const toggleDarkMode = () => {
-    setDarkMode(!darkMode);
-  };
+    setDarkMode(!darkMode)
+  }
 
-  const sunPosition = darkMode ? [-10, -5, -10] : [0, 5, 10];
-  const ambientIntensity = darkMode ? 0.2 : 0.5;
-  const pointIntensity = darkMode ? 0.5 : 1;
+  const sunPosition = darkMode ? [-10, -5, -10] : [0, 5, 10]
+  const ambientIntensity = darkMode ? 0.2 : 0.5
+  const pointIntensity = darkMode ? 0.5 : 1
 
   return (
     <>
@@ -372,13 +368,13 @@ function SceneContainer({
         <WildWestTown />
         <mesh onClick={toggleDarkMode} position={[0, 1, -5]}>
           <boxBufferGeometry args={[1, 1, 1]} />
-          <meshStandardMaterial color={darkMode ? "gray" : "blue"} />
+          <meshStandardMaterial color={darkMode ? 'gray' : 'blue'} />
         </mesh>
       </Suspense>
       {/* <Environment files="/f1.hdr"  /> */}
       {/* <Environment files="https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/1k/industrial_workshop_foundry_1k.hdr" near={100} /> */}
       <PerspectiveCamera
-        theatreKey="Camera"
+        theatreKey='Camera'
         makeDefault
         position={[0, 0, 0]}
         fov={90}
@@ -386,43 +382,23 @@ function SceneContainer({
         far={70}
       />
 
-      {/* <TargetModel
+      <TargetModel
         position={[2.99, 0.18, 1]}
         rotation={[0, 0, 0]}
-        // onClick={handleAniDivS1}
-        onClick={() => {}}
+        onClick={handleAniDivS1}
       />
       <TargetModel
         position={[2.96, 0.2, 0.81]}
         rotation={[0, 0, 0]}
-        // onClick={handleAniDivS2}
-        onClick={() => {}}
+        onClick={handleAniDivS2}
       />
       <TargetModel
         position={[3.1, 0.15, 0.71]}
         rotation={[0, 0, 0]}
-        // onClick={handleAniDivS3}
-        onClick={() => {}}
-      /> */}
-      {/* <TargetModel
-        position={[2.96, 0.2, 0.81]}
-        rotation={[0, 0, 0]}
-        onClick={handleTargetClick}
-      /> */}
-      {isInPosition && (
-        <mesh
-          // onClick={handleTargetClick}
-          // showAniDiv={showAniDiv}
-          position={[3.1, 0.2, -0.46]}
-          onClick={() => {}}
-          showAniDiv={() => {}}
-        >
-          <boxGeometry args={[0.04, 0.04, 0.04]} />
-          <meshStandardMaterial color="orange" />
-        </mesh>
-      )}
+        onClick={handleAniDivS3}
+      />
     </>
-  );
+  )
 }
 
-export default Scene;
+export default Scene
