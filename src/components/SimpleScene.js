@@ -18,6 +18,7 @@ import {
   useGLTF,
   useProgress,
   Environment,
+  Text,
 } from '@react-three/drei'
 import LoadingScreen from './Layout/LoadingScreen'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
@@ -382,11 +383,19 @@ function SceneContainer({
         far={70}
       />
 
-      <TargetModel
-        position={[2.99, 0.18, 1]}
-        rotation={[0, 0, 0]}
-        onClick={handleAniDivS1}
-      />
+      <group>
+        <mesh>
+          <TargetModel
+            position={[2.99, 0.18, 1]}
+            rotation={[0, 0, 0]}
+            onClick={handleAniDivS1}
+          />
+
+          <Text position={[2.97, 0.1, 0.9]} rotation={[0, 1.1, 0]} scale={0.1}>
+            TEST
+          </Text>
+        </mesh>
+      </group>
       <TargetModel
         position={[2.96, 0.2, 0.81]}
         rotation={[0, 0, 0]}
