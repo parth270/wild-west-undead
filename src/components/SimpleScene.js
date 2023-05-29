@@ -19,6 +19,7 @@ import {
   useProgress,
   Environment,
   Text,
+  MeshDistortMaterial,
 } from '@react-three/drei'
 import LoadingScreen from './Layout/LoadingScreen'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
@@ -45,6 +46,7 @@ import {
 import TargetModel from './animations/AnimatedUI/TargetModel'
 import Night from './three/night'
 import { useControls } from 'leva'
+import CowboyFont from '../fonts/Cowboy_Movie.ttf'
 
 const Loader = () => {
   const { progress } = useProgress()
@@ -138,55 +140,46 @@ const Loader = () => {
 //     </>
 //   )
 // }
-
 function Scene({}) {
-  const [isInPosition, setIsInPosition] = useState(false)
+  const [isInPositionScene1, setIsInPositionScene1] = useState(false)
   const [showAniDiv, setShowAniDiv] = useState(false)
   const [showAniDivScene1, setShowAniDivScene1] = useState(false)
   const [showAniDivScene2, setShowAniDivScene2] = useState(false)
   const [showAniDivScene3, setShowAniDivScene3] = useState(false)
   const ref = useRef()
 
-  const handleAniDivS1 = () => {
+  const handleAniDivS1 = useCallback(() => {
     setShowAniDiv(true)
     setShowAniDivScene1(true)
     setShowAniDivScene2(false)
     setShowAniDivScene3(false)
-  }
+  }, [])
 
-  const handleAniDivS2 = () => {
+  const handleAniDivS2 = useCallback(() => {
     setShowAniDiv(true)
     setShowAniDivScene1(false)
     setShowAniDivScene2(true)
     setShowAniDivScene3(false)
-  }
+  }, [])
 
-  const handleAniDivS3 = () => {
+  const handleAniDivS3 = useCallback(() => {
     setShowAniDiv(true)
     setShowAniDivScene1(false)
     setShowAniDivScene2(false)
     setShowAniDivScene3(true)
-  }
+  }, [])
 
-  const handleCloseAniDiv = () => {
+  const handleCloseAniDiv = useCallback(() => {
     setShowAniDiv(false)
     setShowAniDivScene1(false)
     setShowAniDivScene2(false)
     setShowAniDivScene3(false)
-  }
+  }, [])
 
-  // useEffect(() => {
-  //   const canvas = document.getElementById("canvas-222");
-  //   // canvas.children[0].children[1].children[1].style.height="15000px"
-  //   setTimeout(() => {
-  //     if (canvas) {
-  //       canvas.children[0].children[1].children[1].style.height = "15000px";
-  //       console.log(canvas.children[0].children[1].children[1], "check here!");
-  //     }
-  //   }, 10000);
-  // });
-  const sheet = getProject('Fly Through-1', { state: flyThroughState }).sheet(
-    'Scene'
+  const sheet = useMemo(
+    () =>
+      getProject('Fly Through-1', { state: flyThroughState }).sheet('Scene'),
+    []
   )
 
   return (
@@ -207,8 +200,8 @@ function Scene({}) {
         <ScrollControls pages={28}>
           <SheetProvider sheet={sheet}>
             <SceneContainer
-              isInPosition={isInPosition}
-              setIsInPosition={setIsInPosition}
+              isInPositionScene1={isInPositionScene1}
+              setIsInPositionScene1={setIsInPositionScene1}
               showAniDiv={showAniDiv}
               setShowAniDiv={setShowAniDiv}
               handleAniDivS1={handleAniDivS1}
@@ -251,8 +244,8 @@ function Env() {
 }
 
 function SceneContainer({
-  isInPosition,
-  setIsInPosition,
+  isInPositionScene1,
+  setIsInPositionScene1,
   showAniDiv,
 
   handleAniDivS1,
@@ -270,35 +263,45 @@ function SceneContainer({
 
   const [played, setPlayed] = useState(true)
 
-  useEffect(() => {
-    const audio = new Audio('/terror.mp3')
+  //
+  //
+  // ****************************
+  // *****************AUDIO
+  // ****************************
+  // useEffect(() => {
+  //   const audio = new Audio('/terror.mp3')
 
-    const handleScroll = () => {
-      console.log('playing')
-      audio.loop = true // Enable looping
-      audio.play().catch((error) => {
-        // Handle playback error if necessary
-        console.error('Error playing audio:', error)
-      })
-    }
+  //   const handleScroll = () => {
+  //     console.log('playing')
+  //     audio.loop = true // Enable looping
+  //     audio.play().catch((error) => {
+  //       // Handle playback error if necessary
+  //       console.error('Error playing audio:', error)
+  //     })
+  //   }
 
-    const adding = () => {
-      if (played) {
-        handleScroll()
-        setPlayed(false)
-      }
-    }
+  //   const adding = () => {
+  //     if (played) {
+  //       handleScroll()
+  //       setPlayed(false)
+  //     }
+  //   }
 
-    document.addEventListener('wheel', adding, false)
+  //   document.addEventListener('wheel', adding, false)
 
-    return () => {
-      document.removeEventListener('wheel', adding, false)
-      if (audio) {
-        audio.pause()
-        audio.currentTime = 0
-      }
-    }
-  }, [])
+  //   return () => {
+  //     document.removeEventListener('wheel', adding, false)
+  //     if (audio) {
+  //       audio.pause()
+  //       audio.currentTime = 0
+  //     }
+  //   }
+  // }, [])
+  //
+  //
+  //
+  //
+  //
 
   // our callback will run on every animation frame
   useFrame(() => {
@@ -313,10 +316,10 @@ function SceneContainer({
     const currentPage = Math.floor(scroll.offset * scroll.pages) + 1
     console.log('Current Page:', currentPage)
 
-    if (currentPage === 5) {
-      setIsInPosition(true)
+    if (currentPage === 1) {
+      setIsInPositionScene1(true)
     } else {
-      setIsInPosition(false)
+      setIsInPositionScene1(false)
     }
   }
 
@@ -325,29 +328,6 @@ function SceneContainer({
   const [isLoading, setIsLoading] = useState(true)
   const [darkMode, setDarkMode] = useState(true)
   const dispatch = useDispatch()
-
-  // useEffect(() => {
-  //   dispatch(setLoading(true))
-  //   const loader = new GLTFLoader()
-  //   loader.load(
-  //     '/assets/wwu3d.glb',
-  //     () => {
-  //       setIsLoading(false)
-  //       dispatch(setLoading(false))
-  //       setTimeout(() => {
-  //         dispatch(setAppear(false))
-  //       }, 2200)
-  //     },
-  //     (xhr) => {
-  //       // Handle loading progress
-  //       if (xhr.total !== undefined && !isNaN(xhr.total)) {
-  //         const percent = (xhr.loaded / 100234164) * 100
-  //         dispatch(setProgress(percent))
-  //         // console.log(xhr.loaded, xhr.total);
-  //       }
-  //     }
-  //   )
-  // }, [])
 
   const toggleDarkMode = () => {
     setDarkMode(!darkMode)
@@ -382,21 +362,34 @@ function SceneContainer({
         near={0.1}
         far={70}
       />
+      {isInPositionScene1 && (
+        <group>
+          <mesh>
+            <TargetModel
+              position={[2.99, 0.18, 1]}
+              rotation={[0, 0, 0]}
+              onClick={handleAniDivS1}
+            />
 
-      <group>
-        <mesh>
-          <TargetModel
-            position={[2.99, 0.18, 1]}
-            rotation={[0, 0, 0]}
-            onClick={handleAniDivS1}
-          />
-
-          <Text position={[2.97, 0.1, 0.9]} rotation={[0, 1.1, 0]} scale={0.1}>
-            TEST
-          </Text>
-        </mesh>
-      </group>
-      <TargetModel
+            <group>
+              <Text
+                position={[3, 0.2, 0.85]}
+                rotation={[0, 1.18, 0]}
+                scale={0.04}>
+                Upper Text
+              </Text>
+              <Text
+                position={[2.8, 0.21, 0.73]}
+                rotation={[0, 1.18, 0]}
+                scale={0.02}>
+                Lower Text, there will be more text {'\n'}and the amount of text
+                will determine {'\n'}our xyz coordinates
+              </Text>
+            </group>
+          </mesh>
+        </group>
+      )}
+      {/* <TargetModel
         position={[2.96, 0.2, 0.81]}
         rotation={[0, 0, 0]}
         onClick={handleAniDivS2}
@@ -405,7 +398,7 @@ function SceneContainer({
         position={[3.1, 0.15, 0.71]}
         rotation={[0, 0, 0]}
         onClick={handleAniDivS3}
-      />
+      /> */}
     </>
   )
 }

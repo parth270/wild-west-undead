@@ -1,20 +1,28 @@
-import React, { useEffect, useRef, useState } from 'react'
+//IF YOU CAN'T SEE RECENTLY ADDED MODELS THE INTERACTIVE
+//SPHERE IS BLOCKING IT, TRY TO RELOAD -
+//IF STILL NOT WORKING TURN ON THE SPHERE OPACITY TO TROUBLESHOOT
+
+import React, { useEffect, useRef, useState, useCallback, useMemo } from 'react'
 import { useGLTF } from '@react-three/drei'
 import { gsap } from 'gsap'
 
 const TargetModel = ({ position, rotation, onClick }) => {
-  const torusGLB = useGLTF('/assets/Torus.glb')
+  const { scene } = useGLTF('/assets/Torus.glb')
+  const copiedScene = useMemo(() => scene.clone(true), [scene])
+
+  const spotLightRef = useRef()
   const meshRef = useRef()
   const sphereRef = useRef()
+
   const [isHovered, setIsHovered] = useState(false)
   const [isPointerDown, setIsPointerDown] = useState(false)
   const [previousScale, setPreviousScale] = useState({ x: 1, y: 1, z: 1 })
 
-  const toggleHover = () => {
-    setIsHovered(!isHovered)
-  }
+  const toggleHover = useCallback(() => {
+    setIsHovered((prevIsHovered) => !prevIsHovered)
+  }, [])
 
-  const handlePointerDown = () => {
+  const handlePointerDown = useCallback(() => {
     setIsPointerDown(true)
     setPreviousScale({
       x: meshRef.current.scale.x,
@@ -27,9 +35,9 @@ const TargetModel = ({ position, rotation, onClick }) => {
       z: 0.6,
       duration: 0.3,
     })
-  }
+  }, [])
 
-  const handlePointerUp = () => {
+  const handlePointerUp = useCallback(() => {
     setIsPointerDown(false)
     gsap.to(meshRef.current.scale, {
       x: previousScale.x,
@@ -37,7 +45,13 @@ const TargetModel = ({ position, rotation, onClick }) => {
       z: previousScale.z,
       duration: 0.3,
     })
-  }
+  }, [previousScale])
+
+  useEffect(() => {
+    if (spotLightRef.current && copiedScene) {
+      spotLightRef.current.target = copiedScene
+    }
+  }, [copiedScene])
 
   useEffect(() => {
     if (isHovered || isPointerDown) {
@@ -59,12 +73,23 @@ const TargetModel = ({ position, rotation, onClick }) => {
 
   return (
     <>
+      <spotLight
+        ref={spotLightRef}
+        position={[5, 0, 0]}
+        distance={3}
+        intensity={5}
+      />
       <group position={position} rotation={rotation}>
-        <mesh ref={meshRef} onClick={onClick}>
-          <primitive object={torusGLB.scene} scale={0.03} />
+        <mesh ref={meshRef}>
+          <primitive
+            object={copiedScene}
+            rotation={[1.6, 3.1, 1.2]}
+            scale={0.03}
+          />
         </mesh>
         <mesh
           ref={sphereRef}
+          onClick={onClick}
           onPointerOver={toggleHover}
           onPointerOut={toggleHover}
           onPointerDown={handlePointerDown}
