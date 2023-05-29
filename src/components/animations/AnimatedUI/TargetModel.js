@@ -3,7 +3,7 @@ import { useGLTF } from '@react-three/drei'
 import { gsap } from 'gsap'
 
 const TargetModel = ({ position, rotation, onClick }) => {
-  const { scene } = useGLTF('/assets/Torus.glb')
+  const { scene } = useGLTF('/assets/targetwwu.glb')
 
   const copiedScene = useMemo(() => scene.clone(true), [scene])
 
