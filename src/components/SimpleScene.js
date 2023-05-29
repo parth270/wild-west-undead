@@ -383,7 +383,7 @@ function SceneContainer({
         far={70}
       />
 
-      {/* <group>
+      <group>
         <mesh>
           <TargetModel
             position={[2.99, 0.18, 1]}
@@ -405,7 +405,7 @@ function SceneContainer({
         position={[3.1, 0.15, 0.71]}
         rotation={[0, 0, 0]}
         onClick={handleAniDivS3}
-      /> */}
+      />
     </>
   )
 }
