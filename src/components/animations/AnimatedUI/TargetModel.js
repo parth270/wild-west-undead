@@ -73,12 +73,6 @@ const TargetModel = ({ position, rotation, onClick }) => {
 
   return (
     <>
-      <spotLight
-        ref={spotLightRef}
-        position={[5, 0, 0]}
-        distance={3}
-        intensity={5}
-      />
       <group position={position} rotation={rotation}>
         <mesh ref={meshRef}>
           <primitive
