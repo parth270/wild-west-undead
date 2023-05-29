@@ -20,8 +20,9 @@ import {
   Environment,
   Text,
   MeshDistortMaterial,
+  useFont,
 } from '@react-three/drei'
-import LoadingScreen from './Layout/LoadingScreen'
+import { gsap } from 'gsap'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import WildWestTown from './animations/Environment/WildWestTown'
 import { useDispatch } from 'react-redux'
@@ -46,7 +47,8 @@ import {
 import TargetModel from './animations/AnimatedUI/TargetModel'
 import Night from './three/night'
 import { useControls } from 'leva'
-import CowboyFont from '../fonts/Cowboy_Movie.ttf'
+
+import { Perf } from 'r3f-perf'
 
 const Loader = () => {
   const { progress } = useProgress()
@@ -197,6 +199,7 @@ function Scene({}) {
           backgroundColor: '#41100e',
           // visibility: isLoading ? "hidden" : "visible",
         }}>
+        <Perf />
         <ScrollControls pages={28}>
           <SheetProvider sheet={sheet}>
             <SceneContainer
@@ -337,6 +340,27 @@ function SceneContainer({
   const ambientIntensity = darkMode ? 0.2 : 0.5
   const pointIntensity = darkMode ? 0.5 : 1
 
+  //
+  // ********************
+  // *** 3D UI ANIMATION LOGIC
+  // ********************
+  //
+  const groupRef = useRef(null)
+
+  useEffect(() => {
+    // Animate the group scale based on the state value
+    gsap.to(groupRef.current.scale, {
+      x: isInPositionScene1 ? 1 : 0,
+      y: isInPositionScene1 ? 1 : 0,
+      z: isInPositionScene1 ? 1 : 0,
+      duration: 0.5, // Set the duration of the animation
+    })
+  }, [isInPositionScene1])
+  //
+
+  //
+  //
+
   return (
     <>
       {/* <Sky sunPosition={sunPosition} /> */}
@@ -362,33 +386,35 @@ function SceneContainer({
         near={0.1}
         far={70}
       />
-      {isInPositionScene1 && (
-        <group>
-          <mesh>
-            <TargetModel
-              position={[2.99, 0.18, 1]}
-              rotation={[0, 0, 0]}
-              onClick={handleAniDivS1}
-            />
 
-            <group>
-              <Text
-                position={[3, 0.2, 0.85]}
-                rotation={[0, 1.18, 0]}
-                scale={0.04}>
-                Upper Text
-              </Text>
-              <Text
-                position={[2.8, 0.21, 0.73]}
-                rotation={[0, 1.18, 0]}
-                scale={0.02}>
-                Lower Text, there will be more text {'\n'}and the amount of text
-                will determine {'\n'}our xyz coordinates
-              </Text>
-            </group>
-          </mesh>
-        </group>
-      )}
+      <group ref={groupRef}>
+        <mesh>
+          <TargetModel
+            position={[2.99, 0.18, 1]}
+            rotation={[0, 0, 0]}
+            onClick={handleAniDivS1}
+          />
+
+          <group>
+            <Text
+              // font='../Cowboy_Movie.woff'   DOESN'T MAP THE MESH
+              font='./Merriweather-Regular.ttf'
+              position={[3, 0.2, 0.85]}
+              rotation={[0, 1.18, 0]}
+              scale={0.04}>
+              Upper Text
+            </Text>
+            <Text
+              position={[2.8, 0.21, 0.73]}
+              rotation={[0, 1.18, 0]}
+              scale={0.02}>
+              Lower Text, there will be more text {'\n'}and the amount of text
+              will determine {'\n'}our xyz coordinates
+            </Text>
+          </group>
+        </mesh>
+      </group>
+
       {/* <TargetModel
         position={[2.96, 0.2, 0.81]}
         rotation={[0, 0, 0]}
