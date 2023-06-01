@@ -9,6 +9,6 @@ export default function WildWestTown() {
   // const gltf = useGLTF('/assets/wwu4.glb')
   const gltf = useGLTF('/assets/wwu_scene-v1.glb')
   // const gltf = useGLTF('/assets/ww2.glb')
-  
+
   return <primitive object={gltf.scene} scale={0.1} />
 }

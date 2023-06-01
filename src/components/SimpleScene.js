@@ -353,7 +353,12 @@ function SceneContainer({
       x: isInPositionScene1 ? 1 : 0,
       y: isInPositionScene1 ? 1 : 0,
       z: isInPositionScene1 ? 1 : 0,
-      duration: 0.5, // Set the duration of the animation
+      duration: 0.75, // Set the duration of the animation
+    })
+
+    gsap.to(groupRef.current.position, {
+      y: isInPositionScene1 ? 0 : +0.9, // Set the Y position to move up or down
+      duration: 0.5, // Set the duration of the position animation
     })
   }, [isInPositionScene1])
   //
