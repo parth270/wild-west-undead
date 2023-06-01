@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react'
 
-const AniDiv = ({ onClose, title, description, imagePath }) => {
+const AniDiv = ({ onClose, title, subtitle, description, imagePath }) => {
   const [isExiting, setIsExiting] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
 
@@ -57,7 +57,7 @@ const AniDiv = ({ onClose, title, description, imagePath }) => {
           } absolute z-10 w-full h-1/4 top-[5%] flex flex-col justify-around items-center font-serif text-white`}
           ref={aniDivRef}>
           <div className='p-1 flex flex-col justify-center items-center text-center'>
-            <h2 className='text-4xl mb-1'>{title}</h2>
+            <h2 className='text-4xl mb-1'>{subtitle}</h2>
             <div className='line-animation mb-4'></div>
             <h3 className='mb-4 text-lg'>{description}</h3>
           </div>
@@ -108,7 +108,7 @@ const AniDiv = ({ onClose, title, description, imagePath }) => {
         alt=''
       />
       <div className='absolute top-[15%] right-[8%] flex flex-col justify-center items-center text-center'>
-        <h2 className='text-4xl mb-1'>{title}</h2>
+        <h2 className='text-4xl mb-1'>{subtitle}</h2>
         <div
           className={`line-animation ${
             isExiting ? 'exitAnimation' : ''
@@ -144,6 +144,7 @@ export const AniDivScene1 = ({ setShowAniDiv }) => {
   return (
     <AniDiv
       title='Wild West Undead 01'
+      subtitle='Subtitle 01'
       description='Are you ready? In this area, we can describe whatever needs to be described.'
       imagePath='/cow-ddeed.gif'
       onClose={() => setShowAniDiv(false)}
@@ -155,6 +156,7 @@ export const AniDivScene2 = ({ setShowAniDiv }) => {
   return (
     <AniDiv
       title='Wild West Undead 02'
+      subtitle='Subtitle 02'
       description='Are you ready? In this area, we can describe whatever needs to be described.'
       imagePath='/cow-ddeed.gif'
       onClose={() => setShowAniDiv(false)}
@@ -166,6 +168,7 @@ export const AniDivScene3 = ({ setShowAniDiv }) => {
   return (
     <AniDiv
       title='Wild West Undead 03'
+      subtitle='Subtitle 03'
       description='Are you ready? In this area, we can describe whatever needs to be described.'
       imagePath='/cow-ddeed.gif'
       onClose={() => setShowAniDiv(false)}
