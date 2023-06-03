@@ -22,6 +22,9 @@ import {
   MeshDistortMaterial,
   useFont,
 } from '@react-three/drei'
+import { EffectComposer, Noise } from '@react-three/postprocessing'
+import { BlendFunction } from 'postprocessing'
+
 import { gsap } from 'gsap'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import WildWestTown from './animations/Environment/WildWestTown'
@@ -249,6 +252,8 @@ function Env() {
 function SceneContainer({
   isInPositionScene1,
   setIsInPositionScene1,
+  isInPositionScene2,
+  setIsInPositionScene2,
   showAniDiv,
 
   handleAniDivS1,
@@ -306,11 +311,12 @@ function SceneContainer({
   //
   //
 
-  // our callback will run on every animation frame
+  const sequenceLength = val(sheet.sequence.pointer.length)
+
   useFrame(() => {
     if (scroll) {
       logCurrentPage(scroll)
-      const sequenceLength = val(sheet.sequence.pointer.length)
+
       sheet.sequence.position = scroll.offset * sequenceLength
     }
   })
@@ -319,11 +325,13 @@ function SceneContainer({
     const currentPage = Math.floor(scroll.offset * scroll.pages) + 1
     console.log('Current Page:', currentPage)
 
-    if (currentPage === 1) {
-      setIsInPositionScene1(true)
-    } else {
-      setIsInPositionScene1(false)
-    }
+    // if (currentPage === 0 || currentPage === 1) {
+    //   setIsInPositionScene1(true)
+    // } else {
+    //   setIsInPositionScene1(false)
+    // }
+
+    setIsInPositionScene1(currentPage <= 1)
   }
 
   const bgColor = '#84a4f4'
@@ -368,7 +376,9 @@ function SceneContainer({
 
   return (
     <>
-      {/* <Sky sunPosition={sunPosition} /> */}
+      <EffectComposer>
+        <Noise premultiply blendFunction={BlendFunction.ADD} />
+      </EffectComposer>
       <Stars />
       <Night />
       <Night />
@@ -424,8 +434,8 @@ function SceneContainer({
         position={[2.96, 0.2, 0.81]}
         rotation={[0, 0, 0]}
         onClick={handleAniDivS2}
-      />
-      <TargetModel
+      /> */}
+      {/* <TargetModel
         position={[3.1, 0.15, 0.71]}
         rotation={[0, 0, 0]}
         onClick={handleAniDivS3}
