@@ -156,11 +156,12 @@ const Intro = () => {
               <Menu />
             </div>
             <div className='w-[100vw] h-[100vh] absolute  z-20 flex flex-col items-center justify-around '>
+              <div className='w-[2rem] h-[8rem] sm:h-[14rem] xl:h-[30rem]  bg-transparent '></div>
               <img
                 src={'/logo.png'}
-                className='w-[80vw] md:w-[50vw] lg:w-[30vw] '
+                className='w-[80vw] md:w-[50vw] lg:w-[30vw]'
               />
-              <div className='w-[2rem] h-[16rem] sm:h-[14rem] xl:h-[30rem]  bg-transparent '></div>
+
               <h1 className='cursor-pointer mb-10 border-2 border-white flex  items-center justify-center  text-center  bg-[#00000030] backdrop-blur-[5px] rounded-[5px] px-[3rem] pt-[1rem]  cowboy uppercase text-[70px] select-none tracking-[2px]'>
                 <div
                   className='text-[#fff]'
