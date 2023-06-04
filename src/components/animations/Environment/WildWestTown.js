@@ -8,7 +8,7 @@ export default function WildWestTown() {
   // console.log(camera.rotation,"camera-rotation");
   // const gltf = useGLTF('/assets/wwu4.glb')
   // const gltf = useGLTF('/assets/wwu_scene-v1.glb')
-  const gltf = useGLTF('/assets/scene_set-v1.glb')
+  const gltf = useGLTF('/assets/scene_set6-v1.glb')
   // const gltf = useGLTF('/assets/ww2.glb')
 
   return <primitive object={gltf.scene} scale={0.1} />
