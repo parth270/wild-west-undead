@@ -120,10 +120,27 @@ const Intro = () => {
   const isTablet = width <= 1020 // Adjust the threshold value as needed
   console.log(width)
 
+  const [isLandscape, setIsLandscape] = useState(
+    window.matchMedia('(orientation: landscape)').matches
+  )
+
+  useEffect(() => {
+    const handleOrientationChange = (event) => {
+      setIsLandscape(event.matches)
+    }
+
+    const mediaQuery = window.matchMedia('(orientation: landscape)')
+    mediaQuery.addEventListener('change', handleOrientationChange)
+
+    return () => {
+      mediaQuery.removeEventListener('change', handleOrientationChange)
+    }
+  }, [])
+
   const splashImageSrc = isMobile
     ? '/MobileSplashImage.jpg' // Mobile image source
     : isTablet
-    ? '/tabletSplash.jpg' // Tablet image source
+    ? '/SplashImage.jpg' // Tablet image source
     : '/SplashImage.jpg' // Default image source
 
   return (
@@ -157,10 +174,15 @@ const Intro = () => {
             </div>
             <div className='w-[100vw] h-[100vh] absolute  z-20 flex flex-col items-center justify-around '>
               <div className='w-[2rem] h-[8rem] sm:h-[14rem] xl:h-[30rem]  bg-transparent '></div>
-              <img
-                src={'/logo.png'}
-                className='w-[80vw] md:w-[50vw] lg:w-[30vw]'
-              />
+
+              {isLandscape ? (
+                <img src={'/logo.png'} className='w-[40vw]' />
+              ) : (
+                <img
+                  src={'/logo.png'}
+                  className='w-[80vw] md:w-[50vw] lg:w-[30vw]'
+                />
+              )}
 
               <h1 className='cursor-pointer mb-10 border-2 border-white flex  items-center justify-center  text-center  bg-[#00000030] backdrop-blur-[5px] rounded-[5px] px-[3rem] pt-[1rem]  cowboy uppercase text-[70px] select-none tracking-[2px]'>
                 <div
