@@ -148,11 +148,20 @@ const Intro = () => {
       <div className='w-[100%] h-[100vh] relative bg-[#17191c]'>
         {width !== 0 && (
           <>
-            <img
-              src={splashImageSrc}
-              className='w-[100%] h-[100vh] absolute z-10 object-cover '
-              alt=''
-            />
+            {isLandscape ? (
+              <img
+                src={splashImageSrc}
+                className='w-[100%] h-[100vh] absolute z-10 object-top '
+                alt=''
+              />
+            ) : (
+              <img
+                src={splashImageSrc}
+                className='w-[100%] h-[100vh] absolute z-10 object-cover '
+                alt=''
+              />
+            )}
+
             {click && (
               <Tween
                 from={{
