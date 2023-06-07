@@ -13,6 +13,7 @@
     "@theatre/core": "^0.6.1",
     "@theatre/r3f": "^0.6.1",
     "@theatre/studio": "^0.6.1",
+    "babel-plugin-glsl": "^1.0.0",
     "gsap": "^3.11.5",
     "leva": "^0.9.34",
     "postprocessing": "^6.31.0",
